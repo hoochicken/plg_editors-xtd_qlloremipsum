@@ -1,10 +1,17 @@
-/*
- * @author RocketTheme, LLC http://www.rockettheme.com
- * @copyright Copyright (C) 2007 - 2014 RocketTheme, LLC
- * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
+/**
+ * @package        plg_editors-xtd_qlloremipsum
+ * @copyright    Copyright (C) 2017 ql.de All rights reserved.
+ * @author        Mareike Riegel mareike.riegel@ql.de
+ * @license        GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-function qlloremipsum(x)
-{
-    window.parent.insertQlloremipsum(x);
+(() => {
+  window.insertQlloremipsum = (destination, strToBeInserted) => {
+    window.Joomla.editors.instances[destination].replaceSelection(strToBeInserted);
+    return true;
+  }
+})();
+
+function qlloremipsum(x) {
+  window.insertQlloremipsum(x);
 }
