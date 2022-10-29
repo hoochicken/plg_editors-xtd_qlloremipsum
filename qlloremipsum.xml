@@ -27,7 +27,11 @@
 		<language tag="en-GB">languages/en-GB/en-GB.plg_editors-xtd_qlloremipsum.ini</language>
 		<language tag="en-GB">languages/en-GB/en-GB.plg_editors-xtd_qlloremipsum.sys.ini</language>
 	</languages>
-    <config>
+	<media folder="media" destination="plg_editors-xtd_qlloremipsum">
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
+	<config>
         <fields name="params">
             <fieldset name="basic">
                 <field name="default"

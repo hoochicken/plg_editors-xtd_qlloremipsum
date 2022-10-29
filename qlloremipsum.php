@@ -40,7 +40,7 @@ class plgButtonQlloremipsum extends JPlugin
     {
         $this->destination = $destination;
         $doc = \Joomla\CMS\Factory::getDocument();
-        $doc->addScript(JURI::root(true) . '/plugins/editors-xtd/qlloremipsum/js/qlloremipsum.js');
+        $doc->addScript(JURI::root(true) . '/media/plg_editors-xtd_qlloremipsum/js/qlloremipsum.js');
         return $this->getButton();
     }
 
@@ -66,7 +66,6 @@ class plgButtonQlloremipsum extends JPlugin
         $arrString = preg_split("?\n?", $str);
         $str = '<p>' . implode('</p><p>', $arrString) . '</p>';
         $str = str_replace("\n", '<br />', $str);
-        $str = str_replace("\r", '', $str);
-        return $str;
+        return str_replace("\r", '', $str);
     }
 }
