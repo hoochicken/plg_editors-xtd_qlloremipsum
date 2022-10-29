@@ -34,80 +34,26 @@ class plgButtonQlloremipsum extends JPlugin
     /**
      * Display the button
      *
-     * @return array A four element array of (article_id, article_title, category_id, object)
+     * @return CMSObject element array of (article_id, article_title, category_id, object)
      */
     public function onDisplay($destination)
     {
         $this->destination = $destination;
-        //die($destination);
-        // JHtml::_('behavior.modal');
-        $doc = JFactory::getDocument();
+        $doc = \Joomla\CMS\Factory::getDocument();
         $doc->addScript(JURI::root(true) . '/plugins/editors-xtd/qlloremipsum/js/qlloremipsum.js');
-        // $doc->addScriptDeclaration($this->getJavascript());
-        return $this->getButtonJoomla4();
+        return $this->getButton();
     }
 
-    private function getButtonJoomla4()
+    private function getButton(): CMSObject
     {
-        $button = new CMSObject();
+        $button = new CMSObject;
         $button->modal = true;
         $button->set('text', Text::_('PLG_EDITORS-XTD_QLLOREMIPSUM_BUTTON'));
         $button->name = $this->_type . '_' . $this->_name;
         $button->icon = 'edit';
         $button->onclick = sprintf('window.insertQlloremipsum("%s", "%s");return false;', $this->destination, $this->default);
-        $button->set('link', '#');
+        $button->link = '#';
         return $button;
-    }
-
-    private function getButtonJoomla3()
-    {
-        $button = new JObject();
-        $button->set('class', 'btn');
-        $button->set('text', JText::_('PLG_EDITORS-XTD_QLLOREMIPSUM_BUTTON'));
-        $button->set('name', 'paragraph-left');
-        if ((bool)$this->params->get('oneclick', 0)) {
-            $button->onclick = sprintf('window.insertQlloremipsum("%s", "%s");return false;', $this->destination, $this->default);
-            $button->set('link', '#');
-        } else {
-            $button->set('link', $this->getLink());
-            $button->set('options', "{handler: 'iframe', size: {x: 320, y: 290}}");
-            $button->set('modal', true);
-        }
-        return $button;
-    }
-
-    private function getLink()
-    {
-        $link = JFactory::getApplication()->isClient('administrator') ? '..' : '';
-        $link .= '/plugins/editors-xtd/qlloremipsum/html/modal.php?';
-        $link .= 'bp=' . urlencode(JURI::root());
-        $link .= '&default=' . str_replace('\'', '’', $this->default);
-        return $link;
-    }
-
-    private function getJavascript()
-    {
-
-
-        return '';
-        $js = [];
-        $js[] = '
-(() => {
-window.insertQlloremipsum = destination, strToBeInserted => {
-    // const o = window.Joomla.editors.instances[destination].getValue();
-    alert("test");
-    alert("strToBeInserted");
-    debugger;
-    window.Joomla.editors.instances[strToBeInserted].replaceSelection("XXXXXXX");
-    return true;
-  }
-})();
-
-function qlloremipsum(x) {
-  window.insertQlloremipsum(x);
-}
-        
-        ';
     }
 
     private function setDefault()
